@@ -4,7 +4,7 @@ Controls a relay via a web interface and temperature reporting.
 
 This app has a console that accepts commands as well such as:
 
-"t", "temp", "temperaure", or "f" for getting the temperature from the dht11 sheild
+`"t"`, "temp", "temperaure", or "f" for getting the temperature from the dht11 sheild
 
 "h", or "humidity" for getting humidity
 
