@@ -38,9 +38,9 @@ void setup()
 
   wifiManager.autoConnect();
 
-  Serial.println("connected to WiFi");
+  Serial.println("Connected to WiFi.");
   if (mdns.begin("garage", WiFi.localIP())) {
-    Serial.println("MDNS responder started");
+    Serial.println("MDNS responder started.");
   }
 
   ArduinoOTA.setHostname("garage");
@@ -79,14 +79,14 @@ void setup()
   server.onNotFound(handleNotFound);
 
   server.begin();
-  Serial.print("HTTP server started on ");
-  Serial.println(HTTPPORT);
+  Serial.print("HTTP server started on port ");
+  Serial.println(HTTPPORT+".");
 }
 
 void ethConnectError()
 {
   Serial.println(ETHERNET_ERROR_CONNECT);
-  Serial.println("Wifi died.");
+  Serial.println("Wifi died. :(");
 }
 
 void loopStuff()
@@ -168,12 +168,12 @@ void handleNotFound() {
 
 void handleResponse(String cmd = "none") {
       server.send(200, "text/html", "Worked("+cmd+")");
-      Serial.println("Client succesfully executed "+cmd);
+      Serial.println("Client successfully executed "+cmd);
 }
 
 void returnStatus() {
       server.send(200, "text/html", String(relayState));
-      Serial.println("Client succesfully executed Status Command");
+      Serial.println("Client successfully executed Status Command.");
 }
 
 void handleCmd(){
@@ -189,7 +189,7 @@ void handleCmd(){
 
 void nothing()
 {
-  Serial.println("PERSON@INDEX");
+  Serial.println("PERSON@INDEX?????");
 }
 
 void openDoor()
