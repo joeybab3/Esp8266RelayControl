@@ -1,3 +1,4 @@
+#include <ArduinoJson.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
 #include <WiFiUdp.h>
@@ -11,7 +12,7 @@
 #define SERIAL_ERROR_TIMEOUT "E: Serial"
 #define ETHERNET_ERROR_DHCP "E: DHCP"
 #define ETHERNET_ERROR_CONNECT "E: Connect"
-#define HTTPPORT 5678
+#define HTTPPORT 4567
 #define DHTPIN D4     // what pin we're connected to
 #define DHTTYPE DHT11   // DHT 11
 #define SCALE "f"
@@ -21,6 +22,7 @@ WiFiClient client;
 DHT dht(DHTPIN, DHTTYPE);
 WiFiManager wifiManager;
 ESP8266WebServer server(HTTPPORT);
+StaticJsonDocument<256> doc;
 
 const int relayPin = D1;
 int relayState = 0;
@@ -33,6 +35,7 @@ void returnStatus();
 void handleCmd();
 void handleNotFound();
 void handleGet();
+float getTemp(String type /* = ""*/);
 
 void setup()
 {
@@ -48,6 +51,7 @@ void setup()
 
   server.on("/home", handleRoot);
   server.on("/status", returnStatus);
+  server.on("/get", getValues);
   server.on("/open", openDoor);
   server.on("/cmd", handleCmd);
   server.on("/", nothing);
@@ -212,7 +216,7 @@ void openDoor()
   digitalWrite(relayPin, LOW);  // turn off relay with voltage LOW
 }
 
-float getTemp(String type)
+float getTemp(String type /* = ""*/)
 {
     float response;
     if(type == "c" || type == "C")
@@ -229,4 +233,17 @@ float getTemp(String type)
 float getHumidity()
 {
   return dht.readHumidity();
+}
+
+
+void getValues() {
+      doc["status"] = relayState;
+      doc["temp"] = getTemp(SCALE);
+      doc["humidity"] = getHumidity();
+      
+      String output;
+      serializeJson(doc, output);
+      
+      server.send(200, "text/html", output);
+      Serial.println("Client successfully executed Status Command.");
 }
