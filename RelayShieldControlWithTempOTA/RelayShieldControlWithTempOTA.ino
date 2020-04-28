@@ -246,6 +246,7 @@ void openDoor()
   digitalWrite(relayPin, HIGH); // turn on relay with voltage HIGH
   delay(200);              // pause
   digitalWrite(relayPin, LOW);  // turn off relay with voltage LOW
+  relayState = 0;
 }
 
 float getTemp(String type)
@@ -266,6 +267,7 @@ float getHumidity()
 {
   return dht.readHumidity();
 }
+
 void getValues() {
       doc["status"] = relayState;
       doc["temp"] = getTemp(SCALE);

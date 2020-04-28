@@ -35,7 +35,8 @@ void returnStatus();
 void handleCmd();
 void handleNotFound();
 void handleGet();
-float getTemp(String type /* = ""*/);
+void getValues();
+float getTemp(String type);
 
 void setup()
 {
@@ -214,6 +215,7 @@ void openDoor()
   digitalWrite(relayPin, HIGH); // turn on relay with voltage HIGH
   delay(200);              // pause
   digitalWrite(relayPin, LOW);  // turn off relay with voltage LOW
+  relayState = 0;
 }
 
 float getTemp(String type /* = ""*/)

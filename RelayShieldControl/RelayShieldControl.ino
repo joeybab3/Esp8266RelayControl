@@ -168,6 +168,7 @@ void openDoor()
   digitalWrite(relayPin, HIGH); // turn on relay with voltage HIGH
   delay(200);              // pause
   digitalWrite(relayPin, LOW);  // turn off relay with voltage LOW
+  relayState = 0;
 }
 
 void getValues() {
