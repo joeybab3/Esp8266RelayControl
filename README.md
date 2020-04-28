@@ -23,5 +23,4 @@ or `"open"` to toggle the output on or off as in use as a garage door opener.
 To use temperature and humidity, you have to have the shield.
 
 # TO DO:
-* requests process unbearably slow
-* some issue with temperature freezing
+* Better security
