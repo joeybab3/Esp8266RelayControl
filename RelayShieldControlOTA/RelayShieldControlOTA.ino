@@ -1,5 +1,4 @@
 #include <ArduinoJson.h>
-
 #include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
 #include <WiFiUdp.h>
@@ -32,6 +31,7 @@ void nothing();
 void returnStatus();
 void handleCmd();
 void handleNotFound();
+void getValues();
 
 void setup()
 {
@@ -180,15 +180,6 @@ void returnStatus() {
       Serial.println("Client successfully executed Status Command.");
 }
 
-void getValues() {
-      doc["status"] = relayState;
-      String output;
-      serializeJson(doc, output);
-      
-      server.send(200, "text/html", output);
-      Serial.println("Client successfully executed Status Command.");
-}
-
 void handleCmd(){
   for (uint8_t i=0; i<server.args(); i++){
     if(server.argName(i) == "cmd") 
@@ -211,4 +202,14 @@ void openDoor()
   digitalWrite(relayPin, HIGH); // turn on relay with voltage HIGH
   delay(200);              // pause
   digitalWrite(relayPin, LOW);  // turn off relay with voltage LOW
+}
+
+
+void getValues() {
+      doc["status"] = relayState;
+      String output;
+      serializeJson(doc, output);
+      
+      server.send(200, "text/html", output);
+      Serial.println("Client successfully executed Status Command.");
 }

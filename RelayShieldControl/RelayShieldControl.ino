@@ -1,6 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
-
+#include <ArduinoJson.h>
 #include <ESP8266WebServer.h>
 #include <DNSServer.h>
 #include <WiFiManager.h>
@@ -15,6 +15,7 @@
 WiFiClient client;
 WiFiManager wifiManager;
 ESP8266WebServer server(HTTPPORT);
+StaticJsonDocument<256> doc;
 
 const int relayPin = D1;
 int relayState = 0;
@@ -26,6 +27,7 @@ void nothing();
 void returnStatus();
 void handleCmd();
 void handleNotFound();
+void getValues();
 
 void setup()
 {
@@ -41,6 +43,7 @@ void setup()
 
   server.on("/home", handleRoot);
   server.on("/status", returnStatus);
+  server.on("/get", getValues);
   server.on("/open", openDoor);
   server.on("/cmd", handleCmd);
   server.on("/", nothing);
@@ -167,4 +170,11 @@ void openDoor()
   digitalWrite(relayPin, LOW);  // turn off relay with voltage LOW
 }
 
-
+void getValues() {
+      doc["status"] = relayState;
+      String output;
+      serializeJson(doc, output);
+      
+      server.send(200, "text/html", output);
+      Serial.println("Client successfully executed Status Command.");
+}
