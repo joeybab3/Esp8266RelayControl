@@ -10,11 +10,10 @@
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
 
-#define SERIAL_DATA_THRESHOLD_MS 500
-#define SERIAL_ERROR_TIMEOUT "E: Serial"
 #define ETHERNET_ERROR_DHCP "E: DHCP"
 #define ETHERNET_ERROR_CONNECT "E: Connect"
 #define HTTPPORT 4567
+
 #define DHTPIN D4     // what pin we're connected to
 #define DHTTYPE DHT11   // DHT 11
 #define SCALE "f"
@@ -180,9 +179,10 @@ void handleRoot() {
   msg += "<h1>Esp8266/Wemos D1 Mini Relay Shield Controller!</h1>\n";
   msg += "<p></p>\n<div id=\"linkholder\">\n";
   msg += "<div class=\"c"+String(relayState)+"\" id=\"status\"></div>\n";
-  msg += "<a href=\"#\" onclick=\"sendCmd('open');\"><img src=\"//joeybabcock.me/iot/hosted/open.png\"/></a> \n";
-  msg += "<a href=\"#\" onclick=\"sendCmd('0');\"><img src=\"//joeybabcock.me/iot/hosted/o.png\"/></a>\n";
-  msg += "<a href=\"#\" onclick=\"sendCmd('1');\"><img src=\"//joeybabcock.me/iot/hosted/i.png\"/></a>\n<h1 id=\"temp\">72.00&deg;F</h1> <h1>-</h1> <h1 id=\"humidity\">50%</h1>\n</div>\n";
+  msg += "<a href=\"#\" onclick=\"sendCmd('open');\"><img class=\"icon\" src=\"//joeybabcock.me/iot/hosted/open-xl.png\"/></a> \n";
+  msg += "<a href=\"#\" onclick=\"sendCmd('0');\"><img class=\"icon\" src=\"//joeybabcock.me/iot/hosted/o.png\"/></a>\n";
+  msg += "<a href=\"#\" onclick=\"sendCmd('1');\"><img class=\"icon\" src=\"//joeybabcock.me/iot/hosted/i.png\"/></a>\n";
+  msg += "<br/><h1 id=\"temp\">72.00&deg;F</h1> <h1>-</h1> <h1 id=\"humidity\">50%</h1>\n</div>\n";
   msg += "<p>Server Response:<div id=\"response\" class=\"response\"></div></p>\n";
   msg += "<p><form action=\"//cmd\" method=\"get\" id=\"console\"><input placeholder=\"Enter a command...\" type=\"text\" id='console_text'/></form></p>\n";
   msg += "<script>\n$('#console').submit(function(){parseCmd($(\"#console_text\").val());\nreturn false;\n});\ninterval = setInterval(pageLoop, 5000);</script>\n";
