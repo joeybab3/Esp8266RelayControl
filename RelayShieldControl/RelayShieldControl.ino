@@ -12,7 +12,6 @@
 #define HTTPPORT 4567
 
 
-WiFiClient client;
 WiFiManager wifiManager;
 ESP8266WebServer server(HTTPPORT);
 StaticJsonDocument<256> doc;
@@ -98,18 +97,18 @@ void handleRoot() {
   String msg = "<html>\n";
   msg += "<head>\n";
   msg += "<title>ESP8266/Wemos D1 Mini Relay Shield Controller</title>\n";
-  msg += "<link rel=\"stylesheet\" type=\"text/css\" href=\"http://joeybabcock.me/iot/hosted/hosted-relay.css\">";
-  msg += "<script src=\"https://code.jquery.com/jquery-3.1.1.min.js\"></script>\n";
-  msg += "<script src=\"http://joeybabcock.me/iot/hosted/hosted-relay.js\">var relayStatus = "+String(relayState)+";</script>\n";
+  msg += "<link rel=\"stylesheet\" type=\"text/css\" href=\"//joeybabcock.me/iot/hosted/hosted-relay.css\">";
+  msg += "<script src=\"//code.jquery.com/jquery-3.1.1.min.js\"></script>\n";
+  msg += "<script src=\"//joeybabcock.me/iot/hosted/hosted-relay.js\">var relayStatus = "+String(relayState)+";</script>\n";
   msg += "</head>\n";
   msg += "<body>\n";
   msg += "<div id=\"container\">\n";
   msg += "<h1>Esp8266/Wemos D1 Mini Relay Shield Controller!</h1>\n";
   msg += "<p id=\"linkholder\">\n";
   msg += "<div class=\"c"+String(relayState)+"\" id=\"status\"></div>\n";
-  msg += "<a href=\"#\" onclick=\"sendCmd('open');\"><img src=\"http://joeybabcock.me/iot/hosted/open.png\"/></a> \n";
-  msg += "<a href=\"#\" onclick=\"sendCmd('0');\"><img src=\"http://joeybabcock.me/iot/hosted/o.png\"/></a>\n";
-  msg += "<a href=\"#\" onclick=\"sendCmd('1');\"><img src=\"http://joeybabcock.me/iot/hosted/i.png\"/></a></p>\n";
+  msg += "<a href=\"#\" onclick=\"sendCmd('open');\"><img src=\"//joeybabcock.me/iot/hosted/open.png\"/></a> \n";
+  msg += "<a href=\"#\" onclick=\"sendCmd('0');\"><img src=\"//joeybabcock.me/iot/hosted/o.png\"/></a>\n";
+  msg += "<a href=\"#\" onclick=\"sendCmd('1');\"><img src=\"//joeybabcock.me/iot/hosted/i.png\"/></a></p>\n";
   msg += "<p>Server Response:<div id=\"response\" class=\"response\"></div></p>\n";
   msg += "<p><form action=\"//cmd\" method=\"get\" id=\"console\"><input placeholder=\"Enter a command...\" type=\"text\" id='console_text'/></form></p>\n";
   msg += "<script>\n$('#console').submit(function(){parseCmd($(\"#console_text\").val());\nreturn false;\n});\n</script>\n";
