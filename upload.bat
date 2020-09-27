@@ -1,0 +1,1 @@
+py C:\Users\j\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.7.1\tools\espota.py -i 192.168.86.242 -p 8266 --auth= -f RelayShieldControlWithTempOTA.ino.bin
