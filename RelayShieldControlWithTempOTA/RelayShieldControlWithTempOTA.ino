@@ -176,13 +176,14 @@ void handleRoot() {
   msg += "</head>\n";
   msg += "<body>\n";
   msg += "<div id=\"container\">\n";
-  msg += "<h1>Esp8266/Wemos D1 Mini Relay Shield Controller!</h1>\n";
+  msg += "<h1>Esp8266/Wemos D1 Mini Relay Shield Controller</h1>\n";
   msg += "<p></p>\n<div id=\"linkholder\">\n";
   msg += "<div class=\"c"+String(relayState)+"\" id=\"status\"></div>\n";
   msg += "<a href=\"#\" onclick=\"sendCmd('open');\"><img class=\"icon\" src=\"//joeybabcock.me/iot/hosted/open-xl.png\"/></a> \n";
   msg += "<a href=\"#\" onclick=\"sendCmd('0');\"><img class=\"icon\" src=\"//joeybabcock.me/iot/hosted/o.png\"/></a>\n";
   msg += "<a href=\"#\" onclick=\"sendCmd('1');\"><img class=\"icon\" src=\"//joeybabcock.me/iot/hosted/i.png\"/></a>\n";
-  msg += "<br/><h1 id=\"temp\">72.00&deg;F</h1> <h1>-</h1> <h1 id=\"humidity\">50%</h1>\n</div>\n";
+  msg += "<br/><h1 id=\"temp\">Temperature: 72.00&deg;F</h1><br/>\n";
+  msg += "<h1 id=\"humidity\">Humidity: 50%</h1>\n</div>\n";
   msg += "<p>Server Response:<div id=\"response\" class=\"response\"></div></p>\n";
   msg += "<p><form action=\"//cmd\" method=\"get\" id=\"console\"><input placeholder=\"Enter a command...\" type=\"text\" id='console_text'/></form></p>\n";
   msg += "<script>\n$('#console').submit(function(){parseCmd($(\"#console_text\").val());\nreturn false;\n});\ninterval = setInterval(pageLoop, 5000);</script>\n";
