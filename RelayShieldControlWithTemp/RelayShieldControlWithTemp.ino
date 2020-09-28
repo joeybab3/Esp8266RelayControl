@@ -156,7 +156,7 @@ void handleRoot() {
   msg += "<p><form action=\"//cmd\" method=\"get\" id=\"console\"><input placeholder=\"Enter a command...\" type=\"text\" id='console_text'/></form></p>\n";
   msg += "<script>\n$('#console').submit(function(){parseCmd($(\"#console_text\").val());\nreturn false;\n});\ninterval = setInterval(pageLoop, 5000);</script>\n";
   msg += "</div>\n";
-  msg == "</body>\n";
+  msg += "</body>\n";
   msg += "</html>\n";
   server.send(200, "text/html", msg);
 }
